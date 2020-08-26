@@ -80,7 +80,7 @@ class CardrDesktop: Application() {
                 WelcomeWindow(ui!!).show()
             }
 
-            if (getOSType() == OS.MAC) {
+            if (isMac() == OS.MAC) {
                 logger.info("Generating mac menu bar")
                 ui!!.menubarHelper.applyMacMenu()
             }

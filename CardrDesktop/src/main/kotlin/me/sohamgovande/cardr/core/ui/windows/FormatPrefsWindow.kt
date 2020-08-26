@@ -100,7 +100,7 @@ class FormatPrefsWindow(private val cardrUI: CardrUI, private val propertyManage
 
         resetBtn.setOnAction {
             var new = PrefsObject.DEFAULT_CARD_FORMAT
-            if (getOSType() == OS.MAC)
+            if (isMac())
                 new = new.replace("Calibri", PrefsObject.MAC_CALIBRI_FONT)
             editText.htmlText = new
         }

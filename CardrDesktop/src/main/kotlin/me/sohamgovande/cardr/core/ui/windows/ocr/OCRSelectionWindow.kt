@@ -113,7 +113,7 @@ class OCRSelectionWindow(private val cardrUI: CardrUI, private val currentTab: (
         thread = Thread {
             logger.info("Instantiating robot...")
             val robot = Robot()
-            if (getOSType() == OS.MAC) {
+            if (isMac()) {
                 logger.info("macOS detected, so delaying 500ms")
                 robot.delay(500)
             }
@@ -159,7 +159,7 @@ class OCRSelectionWindow(private val cardrUI: CardrUI, private val currentTab: (
 
     private fun getOCRFromAPI(): String? {
         logger.info("Using Jar API to load OCR text")
-        if (getOSType() == OS.MAC) {
+        if (isMac()) {
             System.setProperty("jna.library.path", Paths.get(System.getProperty("cardr.data.dir"), "ocr", "native").toFile().canonicalPath)
             System.setProperty("jna.boot.library.path", Paths.get(System.getProperty("cardr.data.dir"), "ocr", "native").toFile().canonicalPath)
             System.setProperty("jna.nounpack", "true")
@@ -196,7 +196,7 @@ class OCRSelectionWindow(private val cardrUI: CardrUI, private val currentTab: (
             if (e.cause is InvocationTargetException
                 && ((e.cause as InvocationTargetException).cause is UnsatisfiedLinkError ||
                     ((e.cause as InvocationTargetException).targetException is NoClassDefFoundError))
-                && getOSType() == OS.WINDOWS) {
+                && isWindows()) {
                 showVSWarning()
             } else {
                 Platform.runLater { showErrorDialog(e) }

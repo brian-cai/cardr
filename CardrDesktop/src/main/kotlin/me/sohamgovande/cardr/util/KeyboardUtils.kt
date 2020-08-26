@@ -16,7 +16,7 @@ private fun copy(str: String) {
 }
 
 fun pasteObject(data: String, pasteMode: KeyboardPasteMode) {
-    if (getOSType() == OS.MAC) {
+    if (isMac()) {
         copy(data)
         if (pasteMode == KeyboardPasteMode.NORMAL) {
             MacMSWordInteractor().pasteToWord()

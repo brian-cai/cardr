@@ -85,7 +85,7 @@ object Prefs {
                     }
                 }
 
-                if (getOSType() == OS.MAC) {
+                if (isMac()) {
                     prefs.cardFormat = prefs.cardFormat.replace("Calibri", PrefsObject.MAC_CALIBRI_FONT)
                     save()
                 }
@@ -97,7 +97,7 @@ object Prefs {
     }
 
     private fun getOldPrefsPath(): Path {
-        if (getOSType() == OS.MAC)
+        if (isMac())
             return Paths.get(System.getProperty("user.home"), "CardifyDebate", "CardifySettings.json")
         else
             return Paths.get(System.getProperty("user.home"), "AppData", "Local", "CardifyDebate", "app", "CardifySettings.json")

@@ -32,7 +32,7 @@ class MenubarHelper(private val cardrUI: CardrUI, private val stage: Stage) {
     val keepSelectedMI = MenuItem("Keep Only Selected Text")
 
     private val ctrlKeyMask: KeyCombination.Modifier 
-        get() = if (getOSType() == OS.MAC) KeyCombination.META_DOWN else KeyCombination.CONTROL_DOWN
+        get() = if (isMac()) KeyCombination.META_DOWN else KeyCombination.CONTROL_DOWN
 
     fun onSuccessfulLogin() {
         Platform.runLater { signInMI.text = "Log out..." }
@@ -59,7 +59,7 @@ class MenubarHelper(private val cardrUI: CardrUI, private val stage: Stage) {
         val menuBar = MenuBar()
 
         val macApplicationMenu: Menu
-        if (getOSType() == OS.MAC) {
+        if (isMac()) {
             val tk = MenuToolkit.toolkit()
             macApplicationMenu = Menu("cardr", null, tk.createHideMenuItem("cardr"), tk.createHideOthersMenuItem(),
                     tk.createUnhideAllMenuItem(), SeparatorMenuItem(), tk.createQuitMenuItem("cardr"))
@@ -356,7 +356,7 @@ class MenubarHelper(private val cardrUI: CardrUI, private val stage: Stage) {
         aboutMenu.items.add(SeparatorMenuItem())
         aboutMenu.items.add(creditsMI)
 
-        if (getOSType() == OS.MAC) { menuBar.menus.add(macApplicationMenu) }
+        if (isMac()) { menuBar.menus.add(macApplicationMenu) }
         menuBar.menus.add(accountMenu)
         menuBar.menus.add(toolsMenu)
         menuBar.menus.add(settingsMenu)

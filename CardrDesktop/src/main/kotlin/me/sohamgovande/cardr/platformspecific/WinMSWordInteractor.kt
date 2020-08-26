@@ -53,7 +53,7 @@ class WinMSWordInteractor {
 
         init {
             try {
-                if (getOSType() == OS.WINDOWS) {
+                if (isWindows()) {
                     val processor = getProcessorBits()
                     if (processor == 64)
                         System.loadLibrary("NativeDllInterface-x64")

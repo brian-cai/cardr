@@ -44,7 +44,7 @@ class EditPropertiesWindow(private val currentTab: EditCardTabUI) : ModalWindow(
         colName.minWidth = 100.0
         colName.maxWidth = 100.0
 
-        val width = 35.0 + if (getOSType() == OS.MAC) 5.0 else 0.0
+        val width = 35.0 + if (isMac()) 5.0 else 0.0
         colMoveUp.minWidth = width
         colMoveUp.maxWidth = width
         colMoveDown.minWidth = width
@@ -164,7 +164,7 @@ class EditPropertiesWindow(private val currentTab: EditCardTabUI) : ModalWindow(
         for (col in table.columns)
             col.isSortable = false
 
-        table.fixedCellSize = 30.0 + if (getOSType() == OS.MAC) 5.0 else 0.0
+        table.fixedCellSize = 30.0 + if (isMac()) 5.0 else 0.0
         table.prefHeight = table.fixedCellSize * (table.items.size + 1)
 
         val header = Label("Customize Properties Editor")

@@ -69,14 +69,14 @@ class ToolsPaneUI(private val currentTab: EditCardTabUI, private val cardrUI: Ca
         sendToWordBtn.setOnAction { sendCardToWord() }
         sendToWordUI.children.add(sendToWordBtn)
 
-        if (getOSType() == OS.WINDOWS) {
+        if (isWindows()) {
             val msWordInteractor = WinMSWordInteractor()
             wordWindowList.items = FXCollections.observableList(msWordInteractor.getValidWordWindows())
 
             if (!wordWindowList.items.isEmpty()) {
                 wordWindowList.selectionModel.select(0)
             }
-        } else if (getOSType() == OS.MAC) {
+        } else if (isMac()) {
             val msWordInteractor = MacMSWordInteractor()
             wordWindowList.items = FXCollections.observableList(msWordInteractor.getValidWordWindows())
             if (!wordWindowList.items.isEmpty()) {
@@ -207,7 +207,7 @@ class ToolsPaneUI(private val currentTab: EditCardTabUI, private val cardrUI: Ca
             return
         val option = wordWindowList.items[newValue.toInt()]
         if (option == "Create new doc...") {
-            if (getOSType() == OS.WINDOWS) {
+            if (isWindows()) {
                 val verbatimFile = Paths.get(System.getProperty("user.home"), "AppData", "Roaming", "Microsoft", "Templates", "Debate.dotm").toFile()
                 val exeFile = Paths.get("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE").toFile()
                 if (!exeFile.exists()) {
@@ -251,10 +251,10 @@ class ToolsPaneUI(private val currentTab: EditCardTabUI, private val cardrUI: Ca
 
     fun refreshWordWindows() {
         val windows: List<String> = when {
-            getOSType() == OS.WINDOWS -> {
+            isWindows() -> {
                 WinMSWordInteractor().getValidWordWindows()
             }
-            getOSType() == OS.MAC -> {
+            isMac() -> {
                 MacMSWordInteractor().getValidWordWindows()
             }
             else -> {
@@ -459,12 +459,12 @@ class ToolsPaneUI(private val currentTab: EditCardTabUI, private val cardrUI: Ca
             refreshWordWindows()
 
         showSendToWordAlert()
-        if (getOSType() == OS.WINDOWS){
+        if (isWindows()){
             val msWord = WinMSWordInteractor()
             if (wordWindowList.items.size > 0) {
                 msWord.selectWordWindowByDocName(wordWindowList.selectionModel.selectedItem)
             }
-        } else if (getOSType() == OS.MAC){
+        } else if (isMac()){
             val msWord = MacMSWordInteractor()
             if (wordWindowList.items.size > 0) {
                 msWord.selectWordWindowByDocName(wordWindowList.selectionModel.selectedItem)

@@ -78,7 +78,7 @@ class SignInWindow(private val options: SignInLauncherOptions, private val curre
                     logger.error("Unable to decrypt password", e)
                 }
 
-                if (getOSType() == OS.MAC) {
+                if (isMac()) {
                     if (passwordTF.text.isNotEmpty()) {
                         passwordTF.font = Font.font(8.0)
                     } else {
@@ -166,7 +166,7 @@ class SignInWindow(private val options: SignInLauncherOptions, private val curre
             if (it.code == KeyCode.ENTER) {
                 continueBtn.fire()
             }
-            if (getOSType() == OS.MAC) {
+            if (isMac()) {
                 if (passwordTF.text.isNotEmpty()) {
                     passwordTF.font = Font.font(8.0)
                 } else {

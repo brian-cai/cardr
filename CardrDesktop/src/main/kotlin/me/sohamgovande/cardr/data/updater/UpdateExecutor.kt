@@ -35,7 +35,7 @@ class UpdateExecutor(private val version: CardrVersion) {
         initInstallerFile(downloadPath)
         messageHandler("Finished installer download.")
 
-        if (getOSType() == OS.MAC) {
+        if (isMac()) {
             Platform.runLater {
                 onClose()
                 showInfoDialogBlocking("Please read the instructions below.", "1. Once you click OK, a Finder window will appear containing the new cardr update. \n2. To install the update, double click the latest version PKG installer.\n\nClick OK to confirm you have read this message.")

@@ -15,20 +15,20 @@ data class CardrVersion(
     val disabledWindows: Boolean?
 ) {
     fun isAutoUpdaterEnabled(): Boolean {
-        return if (getOSType() == OS.MAC)
+        return if (isMac())
             disabledMac == null || !disabledMac
         else
             disabledWindows == null || !disabledWindows
     }
 
     fun getURL(): String {
-        return if (getOSType() == OS.MAC) urlMacOS else urlWindows
+        return if (isMac()) urlMacOS else urlWindows
     }
 
-    fun shouldExtract(): Boolean = getOSType() == OS.MAC
+    fun shouldExtract(): Boolean = isMac()
 
     fun getDownloadFilename(): String {
-        return if (getOSType() == OS.MAC) {
+        return if (isMac()) {
             downloadFileMac ?: "cardr-${name}.zip"
         }  else {
             downloadFileWin ?: "cardr-${name}.msi"
@@ -36,7 +36,7 @@ data class CardrVersion(
     }
 
     fun getFinalFilename(): String {
-        return if (getOSType() == OS.MAC) {
+        return if (isMac()) {
             finalFileMac ?: "cardr-${name}.pkg"
         }  else {
             downloadFileWin ?: "cardr-${name}.msi"

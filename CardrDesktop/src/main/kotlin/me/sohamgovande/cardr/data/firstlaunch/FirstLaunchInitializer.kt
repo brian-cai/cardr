@@ -90,7 +90,7 @@ private fun downloadOCRData() {
     )
     extractZipFile(Paths.get(System.getProperty("cardr.data.dir"), "OCRData.zip").toFile(), logger)
 
-    if (getOSType() == OS.MAC)
+    if (isMac())
         createDependencySymlinks()
     logger.info("Finished OCR")
 }
@@ -147,9 +147,9 @@ private fun onFirstLaunchMacOS() {
 fun onFirstLaunch(): Exception? {
     return try {
         logger.info("First launch method invoked with OS ${System.getProperty("os.name")}")
-        if (getOSType() == OS.WINDOWS)
+        if (isWindows())
             onFirstLaunchWindows()
-        if (getOSType() == OS.MAC)
+        if (isMac())
             onFirstLaunchMacOS()
         null
     } catch (e: Exception) {
@@ -165,7 +165,7 @@ fun updateFrom(from: Int, to: Int): Exception? {
     if (from == 1 && to >= 2) {
         logger.info("Resetting card format...")
         prefs.cardFormat = PrefsObject.DEFAULT_CARD_FORMAT
-        if (getOSType() == OS.MAC) {
+        if (isMac()) {
             prefs.cardFormat = prefs.cardFormat.replace("Calibri", PrefsObject.MAC_CALIBRI_FONT)
         }
     }
@@ -173,7 +173,7 @@ fun updateFrom(from: Int, to: Int): Exception? {
     if (from < 3 && to >= 3) {
         logger.info("Updating CardrChromeApp")
         hasUpdatedChrome = true
-        if (getOSType() == OS.MAC) {
+        if (isMac()) {
             downloadChromeDataMacOS()
             prefs.cardFormat = prefs.cardFormat.replace("Helvetica", PrefsObject.MAC_CALIBRI_FONT)
         } else {
@@ -190,7 +190,7 @@ fun updateFrom(from: Int, to: Int): Exception? {
             downloadOCRData()
             hasDownloadedOCR = true
         }
-        if (getOSType() == OS.MAC) {
+        if (isMac()) {
             val macScriptsPath = Paths.get(System.getProperty("cardr.data.dir"), "MacScripts")
             try { Files.createDirectories(macScriptsPath) } catch (e: FileAlreadyExistsException) {}
 
@@ -202,7 +202,7 @@ fun updateFrom(from: Int, to: Int): Exception? {
         }
         if (!hasUpdatedChrome) {
             logger.info("Updating CardrChromeApp")
-            if (getOSType() == OS.MAC) {
+            if (isMac()) {
                 downloadChromeDataMacOS()
             } else {
                 downloadChromeDataWindows()
@@ -212,7 +212,7 @@ fun updateFrom(from: Int, to: Int): Exception? {
     }
 
     if (from < 6 && to >= 6) {
-        if (getOSType() == OS.MAC) {
+        if (isMac()) {
             val macScriptsPath = Paths.get(System.getProperty("cardr.data.dir"), "MacScripts")
             try { Files.createDirectory(macScriptsPath) } catch (e: FileAlreadyExistsException) { }
 

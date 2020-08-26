@@ -47,7 +47,7 @@ class CardrUI(val stage: Stage) {
         stage.widthProperty().addListener { _, _, _ -> onWindowResized() }
         stage.heightProperty().addListener { _, _, _ -> onWindowResized() }
 
-        if (getOSType() == OS.WINDOWS) {
+        if (isWindows()) {
             logger.info("Generating default menu bar")
             menubarHelper.applyDefaultMenu(panel)
         }

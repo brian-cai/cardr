@@ -244,7 +244,7 @@ class EditCardTabUI(cardrUI: CardrUI) : TabUI("Card Editor", cardrUI) {
         }
 
         var docHtml = doc.html().replace(spacePlaceholder, "&nbsp;")
-        if (switchFont && getOSType() == OS.MAC) {
+        if (switchFont && isMac()) {
             docHtml = docHtml.replace("font-family:'${PrefsObject.MAC_CALIBRI_FONT}';", "font-family:'Calibri';")
         }
 

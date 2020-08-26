@@ -34,7 +34,7 @@ class CardPropertyManager(currentTab: EditCardTabUI) {
         pGrid.minWidth = 300.0
         pGrid.maxWidth = 305.0
 
-        val extraLabelOffset = if (getOSType() == OS.MAC) 10 else 0
+        val extraLabelOffset = if (isMac()) 10 else 0
         pGrid.columnConstraints.add(ColumnConstraints(60.0 + extraLabelOffset))
         pGrid.columnConstraints.add(ColumnConstraints(225.0 - extraLabelOffset))
 
